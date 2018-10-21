@@ -1,0 +1,50 @@
+Specialty,Doctor's Name,Gender,Language,Office Address,City,State,Zip Code,Office Phone Number,Accepting New Patients,Plan/Network
+General Physician,Dr. Jeffrey S. Edmonds,Male,Spanish;English,4884 Lawman Avenue,Alexandria,VA,22310,703-215-7999,YES,PPO
+Pediatrics,Dr. Siham Areej Toma,Male,English,1976 Payne Street,Rocky Gap,VA,24124,276-928-7966,YES,PPO;HMO
+General Physician,Dr. Katja Hoover,Female,Russian;Spanish;English,3653 Lawman Avenue,Vienna,VA,22181,703-255-2933,NO,PPO;HMO
+Gynecology,Dr. Virginia R. Smith,Female,French;English,1325 Queens Lane,Virgilina,VA,24598,434-585-1038,YES,PPO   
+Cardiologist,Dr. Molly Medley,Female,English,4197 Melody Lane,Beaverdam,VA,23015,804-449-5406,NO,HMO
+Dermatology,Dr. Tyler Whitehouse,Male,English,4756 Broadcast Drive,Richmond,VA,23224,703-954-1279,NO,HMO
+Obstetrics,Dr. Pavia Sandgreen,Male,Hindi;English,604 Jefferson Street,Chesapeake,VA,23323,757-822-3443,YES,PPO
+Psychiatry,Dr. Jeanne Vasilyeva,Female,German;English,1731 Jehovah Drive,Harrisonburg,VA,22800,540-421-3349,YES,PPO;HMO
+Pediatrics,Dr. Scheving Grettisson,Male,English,4271 Lawman Avenue,Washington,VA,20011,703-259-3370,NO,PPO;HMO
+General Physician,Dr. Ada Avilés Granado,Female,Russian;English,2028 Ashford Drive,Arlington,VA,22201,703-637-5493,YES,PPO   
+Pediatrics,Dr. Leonard Berglund,Male,Spanish;English,1936 Douglas Dairy Road,Bristol,VA,24209,276-642-3148,NO,HMO
+General Physician,Dr. Viola Costa,Female,German;French;English,294 Payne Street,Cana ,VA,24317,276-755-7117,NO,HMO
+Gynecology,Dr. Benjamin Meunier,Male,English,4365 Meadowview Drive,Fredericksburg,VA,22408,540-845-0535,YES,PPO
+Cardiologist,Dr. Hanne Larsen,Female,Russian;Spanish;English,4537 Eden Drive,Quinton,VA,23141,804-932-5446,YES,PPO;HMO
+Dermatology,Dr. Kathleen M. Amaker,Female,French;English,1697 Meadowview Drive,Leesburg,VA,22075,540-866-6462,NO,PPO;HMO
+Obstetrics,Dr. Russell B. Duff,Male,English,2434 Allison Avenue,Fredericksburg,VA,22401,757-613-0965,YES,PPO   
+Psychiatry,Dr. Charles C. Shelton,Male,English,200 Jefferson Street,Norfolk,VA,23502,757-764-5480,NO,HMO
+Pediatrics,Dr. Tracee R. Green,Female,English,58 Queens Lane,Lynchburg,VA,24504,434-847-5127,NO,HMO
+General Physician,Dr. Tony M. Richards,Male,German;English,2160 Melody Lane,Kilmarnock,VA,22482,804-436-6273,YES,PPO
+Pediatrics,Dr. Diana R. Young,Female,English,2290 Brooklyn Street,Mcclung,VA,24460,540-996-2254,YES,PPO;HMO
+General Physician,Dr. William F. Moncayo,Male,Russian;English,1131 Golf Course Drive,Herndon,VA,22090,703-380-2960,NO,PPO   
+Gynecology,Dr. Anne G. Wood,Female,Spanish;English,2293 Queens Lane,Palmyra,VA,22963,434-589-0140,YES,HMO
+Cardiologist,Dr. Malik J. Cook,Male,German;French;English,57 Kildeer Drive,Norfolk,VA,23504,757-250-0492,NO,HMO
+Dermatology,Dr. Paula A. Smith,Female,English,127 Queens Lane,South Boston,VA,24592,602-458-5418,NO,PPO
+Pediatrics,Dr. Joel S. Lindsey,Male,English,3982 Fleming Way,Richmond,VA,23238,804-741-3199,NO,PPO;HMO
+General Physician,Dr. William S. Arnold,Male,Russian;English,35 Allison Avenue,Norfolk,VA,23510,757-623-4564,NO,PPO   
+Gynecology,Dr. Michael W. Rosa,Male,Spanish;English,1817 Biddie Lane,Richmond,VA,23228,804-507-9222,YES,HMO
+Cardiologist,Dr. Lori N. Henderson,Female,German;French;English,2043 Fleming Way,Rockville,VA,23146,804-749-7182,YES,HMO
+Dermatology,Dr. Donna J. Holcomb,Female,English,383 Forest Drive,Washington,VA,20005,703-896-9545,NO,PPO
+General Physician,Dr. Heather B. Singh,Female,English,3560 Murry Street,Princess Avenue,VA,23456,757-427-8403,YES,PPO
+Gynecology,Dr. Adriana R. Cook,Male,English,761 Worley Avenue,Charlottesville,VA,22903,434-481-7312,YES,PPO;HMO
+Cardiologist,Dr. Richard G. McGuire,Male,Russian;English,4431 Allison Avenue,Chesapeake,VA,23324,757-545-4815,NO,PPO   
+Dermatology,Dr. Jeremy K. Oh,Male,Spanish;English,2279 Perine Street,Sterling,VA,20166,703-738-2238,YES,HMO
+Pediatrics,Dr. Megan B. Ton,Female,German;English,2659 Murry Street,Portmouth,VA,23707,757-439-5686,YES,HMO
+General Physician,Dr. Lauren T. Weaver,Female,English,502 Melody Lane,Richmond,VA,23220,804-355-0106,NO,PPO
+Gynecology,Dr. Justin E. Sorensen,Male,English,4046 Ashford Drive,Arlington,VA,22204,703-685-4115,NO,PPO
+Cardiologist,Dr. Jeremy A. Boyles,Male,English,1089 Golf Course Drive,Mclean,VA,22101,703-388-5015,YES,PPO;HMO
+Dermatology,Dr. Estella R. Belmont,Female,Russian;English,694 Golf Course Drive,Vienna,VA,22181,703-319-6761,NO,PPO   
+Pediatrics,Dr. Willie R. Schaeffer,Male,Spanish;English,4262 Biddie Lane,Richmond,VA,23224,804-640-0683,YES,HMO
+General Physician,Dr. Rosa J. Ferrer,Female,Spanish;English,2432 South Street,Lynchburg,VA,24504,434-229-0950,YES,HMO
+Gynecology,Dr. Gene J. Klein,Female,Russian;English,2254 Ashford Drive,Centerville,VA,22020,703-679-5373,YES,PPO
+Cardiologist,Dr. Rosa J. Plemmons,Female,Spanish;English,1105 Brooklyn Street,Williamsville,VA,24487,540-925-5369,NO,PPO
+Dermatology,Dr. Latashia R. Kuykendall,Female,English,628 Murry Street,Portsmouth,VA,23707,757-434-0140,NO,PPO;HMO
+Pediatrics,Dr. Phyllis J. Turner,Female,English,4703 Douglas Dairy Road,Norton,VA,24273,276-393-6436,YES,PPO   
+General Physician,Dr. Nancy F. Deluna,Female,Spanish;English,4195 Pinchelone Street,Norfolk,VA,23502,757-329-6225,NO,HMO
+Gynecology,Dr. Bruce C. Hoey,Male,French;English,2461 Cabell Avenue,Arlington,VA,22201,703-527-3175,YES,HMO
+Cardiologist,Dr. Charles D. Lavoie,Male,English,4701 Worley Avenue,Richmond,VA,23227,434-253-5489,YES,PPO
+Dermatology,Dr. Henry J. Schaefer,Male,English,4867 Meadowview Drive,Harrisonburg,VA,22801,540-801-9698,YES,PPO
+Pediatrics,Dr. Nancy L. Haag,Female,Spanish;English,2391 Hurry Street,Fredericksburg,VA,22401,540-370-4048,NO,PPO;HMO
