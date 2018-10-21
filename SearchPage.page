@@ -1,49 +1,60 @@
-<apex:page controller="SearchPageController">
-
-    <apex:form id='form1'>
-        <apex:pageBlock>
-            <apex:inputText id='mile' value="{!mile}">Mile Radius:</apex:inputText>
+<apex:page controller="SearchPageController"> <!-- use the corresponding controller -->
+    <apex:form id="form1">  <!-- we need a form to take in user input -->
+        <apex:pageBlock >
+            <!-- The various filters are displayed here. VF automatically uses the getter and setter methods defined in the controller -->
+            
+            <apex:inputText id="mile" value="{!mile}">Mile Radius:</apex:inputText>
+            
             <apex:inputText value="{!zip}">Zip Code:</apex:inputText>
+            
             <apex:selectList value="{!lang}" multiselect="false" size="1">
                 Language:
                 <apex:selectOptions value="{!languages}"></apex:selectOptions>
             </apex:selectList>
+            
             <apex:selectList value="{!plan}" multiselect="false" size="1">
                 Insurance Plan:
                 <apex:selectOptions value="{!plans}"></apex:selectOptions>
             </apex:selectList>
+            
             <apex:selectList value="{!spec}" multiselect="false" size="1">
                 Specialty:
                 <apex:selectOptions value="{!specialties}"></apex:selectOptions>
             </apex:selectList>
+            
             <apex:selectList value="{!aNP}" multiselect="false" size="1">
                 Accepting New Patients:
                 <apex:selectOptions value="{!newpatients}"></apex:selectOptions>
             </apex:selectList>
-            <apex:commandButton onclick="myFunction()" reRender="docs" value="Search"/>
+            
+            <!-- Search button which rerenders the below table -->
+            <apex:commandButton action="{!search}" reRender="docs" value="Search"/>
             
         </apex:pageBlock>
-        <apex:pageBlock>
-            <apex:pageBlockSection>
-                <apex:pageBlockTable id="docs" value="{!doctors}" var="d">
-                    <apex:column>
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <!-- The table of doctors that is displayed -->
+                <apex:pageBlockTable  id="docs" value="{!doctors}" var="d">
+                    <!-- Each column displays a different field from the doctor object -->
+                    <apex:column >
+                        <!-- The doctor's name is a link to that doctor's detail page -->
                         <apex:outputLink value="/{!d.ID}">
                             {!d.name}
                         </apex:outputLink>
                     </apex:column>
-                    <apex:column>
-                        {!d.specialty__c}
+                    <apex:column >
+                        {!d.Specialty__c}
                     </apex:column>
-                    <apex:column id='dzip'>
-                        {!d.zip_code__c}
+                    <apex:column id="dzip">
+                        {!d.Zip_Code__c}
                     </apex:column>
-                    <apex:column>
-                        {!d.languages__c}
+                    <apex:column >
+                        {!d.Languages__c}
                     </apex:column>
-                    <apex:column>
+                    <apex:column >
                         {!d.Plan_Network__c}
                     </apex:column>
-                    <apex:column>
+                    <apex:column >
                         {!d.Accepting_New_Patients__c}
                     </apex:column>
                     

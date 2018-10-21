@@ -1,5 +1,8 @@
 public class SearchPageController {
     
+    //user input variables with getter and setter methods:
+    //These are used to transfer data between VF and Apex
+    
     public String mile{get;set;}
     
     public String spec = 'All';
@@ -42,9 +45,18 @@ public class SearchPageController {
     
     public Integer z;
     
+    
+    
+    //method that queries the database according to search filters:
+    
     public List<Doctor__c> getDoctors(){
+        //base query
         String query = 'SELECT Name, Accepting_New_Patients__c,Plan_Network__c ,Languages__c ,Specialty__c, Office_Address__c, City__c, Zip_Code__c FROM Doctor__c';
+        
+        //hasWhere tells us whether or not the query already has a WHERE clause or not
         Boolean hasWhere = false;
+        
+        //Edit query with specialty filter
         if(spec!='All'){
             if(!hasWhere){
                 query+=' WHERE Specialty__c=:spec';
@@ -54,16 +66,9 @@ public class SearchPageController {
             }
             
         }
-        if(isZip(zip)){
-            z = Integer.valueOf(zip);
-            if(!hasWhere){
-                query+=' WHERE Zip_Code__c = :z';
-                hasWhere=true;
-            }else{
-                query+=' AND Zip_Code__c = :z';
-            }
-            
-        }
+        
+        
+        //Edit query with language filter
         if(lang!='All'){
             
             if(!hasWhere){
@@ -74,6 +79,8 @@ public class SearchPageController {
             }
             
         }
+        
+        //Edit query with plan filter
         if(plan!='Both'){
             
             if(!hasWhere){
@@ -84,6 +91,9 @@ public class SearchPageController {
             }
             
         }
+        
+        
+        //Edit query with accepting new patients filter
         if(aNP!='Both'){
             
             if(!hasWhere){
@@ -95,24 +105,90 @@ public class SearchPageController {
             
         }
         System.debug(query);
+        
+        //Query the database and obtain a list of doctors
         List<Doctor__c> dlist = Database.query(query);
-        List<Doctor__c> filterList = new List<Doctor__c>();
-        for(Doctor__c d : dlist){
-           // if(getDistance(z,d.Zip_Code__c)<=mile){
-             //   filterList.add(d);
-            //}
+        
+        
+        //If a valid mile radius and zip code are specified, remove doctors who are outside the radius from the list (this is done in the closeDoctors method)
+        if(mile!=NULL){
+            //the isZip method is explained later in the code
+            if(isZip(zip)&&mile.isNumeric()){
+                dlist = closeDoctors(dlist,Integer.valueOf(mile));
+            }
         }
         
+        
+        
+        //Give the filtered list of doctors to the VF page
         return dlist;
     }
     
     
-    
-    public void search(){
-        //System.debug(zip);
+    //Method that calls the API for each doctor in the list, and returns only the doctors within the specified mile radius
+    private List<Doctor__c> closeDoctors(List<Doctor__c> fullList, Integer radius){
+        //list to be returned
+        List<Doctor__c> closeList = new List<Doctor__c>();
+        
+        //for each doctor
+        for(Integer i=0;i<fullList.size();i++){
+            
+            //do some http shenanigans to call the API
+            Http http = new Http();
+            HttpRequest req = new HttpRequest();
+            HttpResponse resp;
+            req.setMethod('GET');
+            //This URL calls the api with the specified zip code values. In order for this to work, you have to add https://maps.googleapis.com to your org's Remote Sites (type Remote Site in Quick Find Box)
+            req.setEndpoint('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+zip+'&destinations='+fullList[i].Zip_Code__c+'&language=en&units=imperial&sensor=false&key=AIzaSyBUcAx046byoKwvtNMpxbTNkz-F0PwA7ao');
+            resp = http.send(req);
+            //System.debug('------resp-----------'+resp.getBody());
+            
+            //the API returns the results in JSON, so we have to extract the info using a parser
+            JSONParser parser = JSON.createParser(resp.getBody());
+            
+            //variable where the distance between the two zip codes is stored
+            String distance;
+            
+            //iterate through the JSON tokens (I don't understand how this works either)
+            while(parser.nextToken()!=NULL){
+                //find the first value
+                if(parser.getText()=='value'){
+                    //jump to the value(a number representing distance in meters)
+                    parser.nextToken();
+                    //set distance equal to that value
+                    distance = parser.gettext();
+                    
+                    //System.debug(distance);
+                    //break out of the loop so that we ignore other values
+                    break;
+                }
+            }
+            
+            //if the API could not find one of the zip codes, distance is still null.
+            if(distance==NULL){
+                //If this is the case, set distance to some large number so that this doctor is removed from the list
+                
+                distance = '99999999999';
+                //print out the zip code that failed so that we can ask the BAs about it
+                System.debug(fullList[i].Zip_Code__c);
+            }
+            //compare the distance(after we convert it to miles) to the specified mile radius
+            if((Decimal.valueOf(distance)/1609.344)<=radius){
+                //add close doctors to the filtered list
+                closeList.add(fullList[i]);
+            }
+        }
+        
+        //pass back the list of close doctors
+        return closeList;
     }
     
+    //this method executes when the user clicks 'Search'. It doesn't do anything other than rerender the doctor list(then getDoctors does the rest)
+    public void search(){
+        
+    }
     
+    //Method that checks if the zip code entered by the user is 5 digits long and composed only of numbers
     private Boolean isZip(String z){
         if(z!=NULL){
             if(z.length()==5&&z.isNumeric()){
@@ -122,11 +198,17 @@ public class SearchPageController {
         return false;
     }
     
+    
+    //Method that provides the VF page with the list of options for the 'Accepting New Patients' filter
     public List<SelectOption> getNewPatients(){
         
+        //list of options to return
         List<SelectOption> options = new List<SelectOption>();
+        //list of avalable picklist values from the Accepting New Doctors field
         List<PicklistEntry> pick = Doctor__c.Accepting_New_Patients__c.getDescribe().getPicklistValues();
+        //Additional 'All' option
         options.add(new SelectOption('BOTH','Both'));
+        //Add them to the list
         for(Integer i=0;i<pick.size();i++){
             options.add(new SelectOption(pick[i].getValue(),pick[i].getValue()));
         }
@@ -134,7 +216,7 @@ public class SearchPageController {
         return options;
     }
     
-    
+    //Same as above, but this time for the Languages filter
     public List<SelectOption> getLanguages(){
         
         List<SelectOption> options = new List<SelectOption>();
@@ -147,6 +229,7 @@ public class SearchPageController {
         return options;
     }
     
+    //Same as above, but this time for the Plans filter
     public List<SelectOption> getPlans(){
         
         List<SelectOption> options = new List<SelectOption>();
@@ -159,6 +242,7 @@ public class SearchPageController {
         return options;
     }
     
+    //Same as above, but this time for the Specialties filter
     public List<SelectOption> getSpecialties(){
         
         List<SelectOption> options = new List<SelectOption>();
