@@ -265,7 +265,7 @@ public class SearchPageController {
         PageReference Page = new PageReference('/apex/DoctorDetail?id='+docID);
 		
     	Page.setRedirect(true);
-
+ 
    		return Page;
     }
     
