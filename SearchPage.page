@@ -1,9 +1,33 @@
-<apex:page controller="SearchPageController"> <!-- use the corresponding controller -->
+<apex:page  controller="SearchPageController"> <!-- use the corresponding controller -->
     
+    <script>
+    //get user's current longitude and lattitude and store them in inputHiddens
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            //x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
     
-    <apex:form id="form1">  <!-- we need a form to take in user input -->
-        <apex:inputHidden id='lat'></apex:inputHidden>
-        <apex:inputHidden id='lon'></apex:inputHidden>
+    function showPosition(position) {
+        let lat = document.getElementById("j_id0:form1:lat");
+    	let lon = document.getElementById("j_id0:form1:lon");
+        lat.innerHTML = position.coords.latitude;
+        lon.innerHTML = position.coords.longitude;
+        
+    }
+    </script>
+    <apex:form  id="form1">  <!-- we need a form to take in user input -->
+        <!-- inputHiddens pass lat and lon to controller -->
+        <apex:inputHidden id="lat" value="{!lat}"></apex:inputHidden>
+        <apex:inputHidden id="lon" value="{!lon}"></apex:inputHidden>
+        <!-- user specifies how they want distance to doctors calculated -->
+        <apex:selectRadio value="{!distanceFilter}" onclick="getLocation()">
+            <apex:selectOption itemValue="zipcode" itemLabel="Enter a Zip Code"></apex:selectOption>
+        	<apex:selectOption itemValue="currentLocation" itemLabel="Use Current Location"></apex:selectOption>
+            
+        </apex:selectRadio>
         <apex:pageBlock >
             <!-- The various filters are displayed here. VF automatically uses the getter and setter methods defined in the controller -->
             
@@ -39,28 +63,28 @@
             
             <apex:pageBlockSection >
                 <!-- The table of doctors that is displayed -->
-                <apex:pageBlockTable  id="docs" value="{!doctors}" var="d">
+                <apex:pageBlockTable id="docs" value="{!doctors}" var="d">
                     <!-- Each column displays a different field from the doctor object -->
-                    <apex:column >
+                    <apex:column headerValue="Doctor Name" >
                         <!-- The doctor's name is a link to that doctor's detail page -->
                         <!-- The correct ID is set to the controller through a JS function when user mouses over the link -->
                         <apex:commandLink onmouseover="passID('{!d.id}')" action="{!doctorD}">
                             {!d.name}                            
                         </apex:commandLink>
                     </apex:column>
-                    <apex:column >
+                    <apex:column headerValue="Specialty">
                         {!d.Specialty__c}
                     </apex:column>
-                    <apex:column id="dzip">
+                    <apex:column headerValue="Zip Code" id="dzip">
                         {!d.Zip_Code__c}
                     </apex:column>
-                    <apex:column >
+                    <apex:column headerValue="Languages Spoken">
                         {!d.Languages__c}
                     </apex:column>
-                    <apex:column >
+                    <apex:column headerValue="Insurance Plans">
                         {!d.Plan_Network__c}
                     </apex:column>
-                    <apex:column >
+                    <apex:column headerValue="Accepting New Patients?">
                         {!d.Accepting_New_Patients__c}
                     </apex:column>
                     

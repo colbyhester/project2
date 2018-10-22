@@ -45,7 +45,10 @@ public class SearchPageController {
     
     public Integer z;
     
+    public Decimal lat{get;set;}   
+    public Decimal lon{get;set;}   
     
+    public String distanceFilter{get;set;}
     
     //method that queries the database according to search filters:
     
@@ -113,7 +116,7 @@ public class SearchPageController {
         //If a valid mile radius and zip code are specified, remove doctors who are outside the radius from the list (this is done in the closeDoctors method)
         if(mile!=NULL){
             //the isZip method is explained later in the code
-            if(isZip(zip)&&mile.isNumeric()){
+            if(isZip(zip)&&mile.isNumeric()&&distanceFilter=='zipcode'){
                 dlist = closeDoctors(dlist,Integer.valueOf(mile));
             }
         }
@@ -259,13 +262,13 @@ public class SearchPageController {
     public String docID{get;set;}
     
     //Method called when user clicks a doctor's name
-    public PageReference doctorD(){ 
+    public PageReference doctorD(){
         
 		//link to DoctorDetail page with specified doctor's ID
         PageReference Page = new PageReference('/apex/DoctorDetail?id='+docID);
 		
     	Page.setRedirect(true);
- 
+
    		return Page;
     }
     
