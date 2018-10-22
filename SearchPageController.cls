@@ -259,7 +259,7 @@ public class SearchPageController {
     public String docID{get;set;}
     
     //Method called when user clicks a doctor's name
-    public PageReference doctorD(){
+    public PageReference doctorD(){ 
         
 		//link to DoctorDetail page with specified doctor's ID
         PageReference Page = new PageReference('/apex/DoctorDetail?id='+docID);
