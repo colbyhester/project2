@@ -1,0 +1,6 @@
+<apex:page standardController="Doctor__c">
+    <apex:pageBlock>
+        <!-- Custom Doctor detail page. Linked to by SearchPage -->
+    	<apex:detail relatedList="false" inlineEdit="false" title="false" showChatter="false"/>
+    </apex:pageBlock>
+</apex:page>

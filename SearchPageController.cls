@@ -254,4 +254,20 @@ public class SearchPageController {
         
         return options;
     }
+    
+    //ID of the doctor the user is about to click on(updated onmouseover)
+    public String docID{get;set;}
+    
+    //Method called when user clicks a doctor's name
+    public PageReference doctorD(){
+        
+		//link to DoctorDetail page with specified doctor's ID
+        PageReference Page = new PageReference('/apex/DoctorDetail?id='+docID);
+		
+    	Page.setRedirect(true);
+
+   		return Page;
+    }
+    
+
 }

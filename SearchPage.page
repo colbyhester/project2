@@ -1,5 +1,9 @@
 <apex:page controller="SearchPageController"> <!-- use the corresponding controller -->
+    
+    
     <apex:form id="form1">  <!-- we need a form to take in user input -->
+        <apex:inputHidden id='lat'></apex:inputHidden>
+        <apex:inputHidden id='lon'></apex:inputHidden>
         <apex:pageBlock >
             <!-- The various filters are displayed here. VF automatically uses the getter and setter methods defined in the controller -->
             
@@ -32,15 +36,17 @@
             
         </apex:pageBlock>
         <apex:pageBlock >
+            
             <apex:pageBlockSection >
                 <!-- The table of doctors that is displayed -->
                 <apex:pageBlockTable  id="docs" value="{!doctors}" var="d">
                     <!-- Each column displays a different field from the doctor object -->
                     <apex:column >
                         <!-- The doctor's name is a link to that doctor's detail page -->
-                        <apex:outputLink value="/{!d.ID}">
-                            {!d.name}
-                        </apex:outputLink>
+                        <!-- The correct ID is set to the controller through a JS function when user mouses over the link -->
+                        <apex:commandLink onmouseover="passID('{!d.id}')" action="{!doctorD}">
+                            {!d.name}                            
+                        </apex:commandLink>
                     </apex:column>
                     <apex:column >
                         {!d.Specialty__c}
@@ -59,7 +65,18 @@
                     </apex:column>
                     
                 </apex:pageBlockTable>
+                
             </apex:pageBlockSection>
         </apex:pageBlock>  
+        <!-- Hidden input passes ID to controller -->
+        <apex:inputHidden id="docid" value="{!docID}"/>
     </apex:form>
+    <script>
+    //This JS function takes in the ID of the doctor who's name the user is mousing over, and puts it in the hidden input
+    	function passID(value){
+            console.log(value);
+            document.getElementById('j_id0:form1:docid').value=value;
+            
+        }
+    </script>
 </apex:page>
