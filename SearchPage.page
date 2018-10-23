@@ -40,8 +40,9 @@
             </apex:selectList>
             
             <!-- Search button which rerenders the below table -->
-            <apex:commandButton action="{!search}" reRender="docs" value="Search"/>
-            
+            <apex:commandButton status="loading" action="{!search}" reRender="docs" value="Search"/>
+            <!-- This component displays 'loading...' while search results are loading -->
+            <apex:actionStatus id="loading" startText="loading..." stopText="" />
         </apex:pageBlock>
         <apex:pageBlock >
             
