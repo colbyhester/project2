@@ -1,0 +1,18 @@
+<apex:page standardController="Doctor__c" extensions="DoctorControllerExtension">
+    <apex:pageBlock>
+    	<apex:pageBlockSection>
+        	<apex:form>
+                <!-- User inputs information for appointment -->
+                Appointment Date and Time
+            	<apex:inputField value="{!app['appointment_date_and_time__c']}"/>
+				Patient Phone Number
+            	<apex:inputField value="{!app['patient_phone_number__c']}"/>
+				Patent Email
+            	<apex:inputField value="{!app['patient_email__c']}"/>
+                
+                <!-- Button that creates the appointment record and moves to next page -->
+                <apex:commandButton action="{!book}" value="Book" />
+            </apex:form>
+        </apex:pageBlockSection>
+    </apex:pageBlock>  
+</apex:page>
