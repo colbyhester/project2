@@ -116,7 +116,7 @@ public class SearchPageController {
         //If a valid mile radius and zip code are specified, remove doctors who are outside the radius from the list (this is done in the closeDoctors method)
         if(mile!=NULL){
             //the isZip method is explained later in the code
-            if(isZip(zip)&&mile.isNumeric()&&distanceFilter=='zipcode'){
+            if(mile.isNumeric()&&((isZip(zip)&&distanceFilter=='zipcode')||distanceFilter=='currentLocation')){
                 dlist = closeDoctors(dlist,Integer.valueOf(mile));
             }
         }
@@ -142,7 +142,13 @@ public class SearchPageController {
             HttpResponse resp;
             req.setMethod('GET');
             //This URL calls the api with the specified zip code values. In order for this to work, you have to add https://maps.googleapis.com to your org's Remote Sites (type Remote Site in Quick Find Box)
-            req.setEndpoint('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+zip+'&destinations='+fullList[i].Zip_Code__c+'&language=en&units=imperial&sensor=false&key=AIzaSyBUcAx046byoKwvtNMpxbTNkz-F0PwA7ao');
+            if(distanceFilter=='zipcode'){
+            	req.setEndpoint('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+zip+'&destinations='+fullList[i].Zip_Code__c+'&language=en&units=imperial&sensor=false&key=AIzaSyBUcAx046byoKwvtNMpxbTNkz-F0PwA7ao');
+            }else if(distanceFilter=='currentLocation'){
+                req.setEndpoint('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+','+lon+'&destinations='+fullList[i].Zip_Code__c+'&language=en&units=imperial&sensor=false&key=AIzaSyBUcAx046byoKwvtNMpxbTNkz-F0PwA7ao');
+                System.debug('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+','+lon+'&destinations='+fullList[i].Zip_Code__c+'&language=en&units=imperial&sensor=false&key=AIzaSyBUcAx046byoKwvtNMpxbTNkz-F0PwA7ao');
+
+            }
             resp = http.send(req);
             //System.debug('------resp-----------'+resp.getBody());
             

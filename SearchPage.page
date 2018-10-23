@@ -1,33 +1,17 @@
-<apex:page  controller="SearchPageController"> <!-- use the corresponding controller -->
+<apex:page controller="SearchPageController"> <!-- use the corresponding controller -->
     
-    <script>
-    //get user's current longitude and lattitude and store them in inputHiddens
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
-            //x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
     
-    function showPosition(position) {
-        let lat = document.getElementById("j_id0:form1:lat");
-    	let lon = document.getElementById("j_id0:form1:lon");
-        lat.innerHTML = position.coords.latitude;
-        lon.innerHTML = position.coords.longitude;
-        
-    }
-    </script>
-    <apex:form  id="form1">  <!-- we need a form to take in user input -->
+    <apex:form id="form1">  <!-- we need a form to take in user input -->
         <!-- inputHiddens pass lat and lon to controller -->
         <apex:inputHidden id="lat" value="{!lat}"></apex:inputHidden>
         <apex:inputHidden id="lon" value="{!lon}"></apex:inputHidden>
+        
         <!-- user specifies how they want distance to doctors calculated -->
         <apex:selectRadio value="{!distanceFilter}" onclick="getLocation()">
             <apex:selectOption itemValue="zipcode" itemLabel="Enter a Zip Code"></apex:selectOption>
-        	<apex:selectOption itemValue="currentLocation" itemLabel="Use Current Location"></apex:selectOption>
-            
+            <apex:selectOption itemValue="currentLocation" itemLabel="Use Current Location"></apex:selectOption>    
         </apex:selectRadio>
+        
         <apex:pageBlock >
             <!-- The various filters are displayed here. VF automatically uses the getter and setter methods defined in the controller -->
             
@@ -97,10 +81,30 @@
     </apex:form>
     <script>
     //This JS function takes in the ID of the doctor who's name the user is mousing over, and puts it in the hidden input
-    	function passID(value){
-            console.log(value);
-            document.getElementById('j_id0:form1:docid').value=value;
-            
+    function passID(value){
+        console.log(value);
+        document.getElementById('j_id0:form1:docid').value=value;
+        
+    }
+    
+    
+    
+    
+    //get user's current longitude and lattitude and store them in inputHiddens
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            //x.innerHTML = "Geolocation is not supported by this browser.";
         }
+    }
+    
+    function showPosition(position) {
+        let lat = document.getElementById("j_id0:form1:lat");
+        let lon = document.getElementById("j_id0:form1:lon");
+        lat.value = position.coords.latitude;
+        lon.value = position.coords.longitude;
+        
+    }
     </script>
 </apex:page>
