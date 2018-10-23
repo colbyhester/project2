@@ -2,6 +2,7 @@
     
     
     <apex:form id="form1">  <!-- we need a form to take in user input -->
+        
         <!-- inputHiddens pass lat and lon to controller -->
         <apex:inputHidden id="lat" value="{!lat}"></apex:inputHidden>
         <apex:inputHidden id="lon" value="{!lon}"></apex:inputHidden>
@@ -12,9 +13,9 @@
             <apex:selectOption itemValue="currentLocation" itemLabel="Use Current Location"></apex:selectOption>    
         </apex:selectRadio>
         
-        <apex:pageBlock >
-            <!-- The various filters are displayed here. VF automatically uses the getter and setter methods defined in the controller -->
-            
+        
+        <!-- The various filters are displayed here. VF automatically uses the getter and setter methods defined in the controller -->
+        <apex:pageBlock>
             <apex:inputText id="mile" value="{!mile}">Mile Radius:</apex:inputText>
             
             <apex:inputText value="{!zip}">Zip Code:</apex:inputText>
@@ -74,6 +75,7 @@
                     </apex:column>
                     
                 </apex:pageBlockTable>
+                <apex:commandButton action="{!pdfpage}" value="View as PDF"/>
                 
             </apex:pageBlockSection>
         </apex:pageBlock>  
