@@ -64,7 +64,6 @@
        <apex:pageBlockSection title="Immunizations" columns="3">
        
        </apex:pageBlockSection>
-    
        
         </apex:pageBlock>
     </apex:form>
