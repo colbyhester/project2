@@ -1,21 +1,21 @@
 <apex:page standardController="Doctor__c" extensions="DoctorControllerExtension">
     <apex:pageBlock >
         <!-- Custom Doctor detail page. Linked to by SearchPage -->
-        <apex:pageBlockSection>
-        	<apex:outputField value="{!doctor__c.name}"/>
-            <apex:outputField value="{!doctor__c.office_address__c}"/>
-            <apex:outputField value="{!doctor__c.city__c}"/>
-            <apex:outputField value="{!doctor__c.state__c}"/>
-            <apex:outputField value="{!doctor__c.zip_code__c}"/>
-            <apex:outputField value="{!doctor__c.Office_Phone_Number__c}"/>
-            <apex:outputField value="{!doctor__c.languages__c}"/>
-            <apex:outputField value="{!doctor__c.gender__c}"/>
-            <apex:outputField value="{!doctor__c.accepting_new_patients__c}"/>
-            <apex:outputField value="{!doctor__c.specialty__c}"/>
-            <apex:outputField value="{!doctor__c.plan_network__c}"/>
+        <apex:pageBlockSection >
+        	<apex:outputField value="{!Doctor__c.name}"/>
+            <apex:outputField value="{!Doctor__c.Office_Address__c}"/>
+            <apex:outputField value="{!Doctor__c.City__c}"/>
+            <apex:outputField value="{!Doctor__c.State__c}"/>
+            <apex:outputText label="Zip Code" value="{!zip}"/>
+            <apex:outputField value="{!Doctor__c.Office_Phone_Number__c}"/>
+            <apex:outputField value="{!Doctor__c.Languages__c}"/>
+            <apex:outputField value="{!Doctor__c.Gender__c}"/>
+            <apex:outputField value="{!Doctor__c.Accepting_New_Patients__c}"/>
+            <apex:outputField value="{!Doctor__c.Specialty__c}"/>
+            <apex:outputField value="{!Doctor__c.Plan_Network__c}"/>
         </apex:pageBlockSection>
-        <apex:pageBlockSection>
-        	<apex:form>
+        <apex:pageBlockSection >
+        	<apex:form >
                 <!-- Button that links to the Book Appointment Page-->
             	<apex:commandButton action="{!bookApp}" value="Book Appointment"/>
             </apex:form>

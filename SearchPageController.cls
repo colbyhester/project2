@@ -279,6 +279,7 @@ public class SearchPageController {
    		return Page;
     }
     
+    //Method that opens up the search results as a PDF
     public PageReference pdfPage(){
         
         PageReference Page = new PageReference('/apex/DoctorPDF');
@@ -286,6 +287,13 @@ public class SearchPageController {
     	Page.setRedirect(false);
 
    		return Page;
+    }
+    
+    //Method that queries for the current user's Appointments
+    public List<Appointment__c> getApps(){
+        ID you = UserInfo.getUserId();
+        List<Appointment__c> appList = [SELECT Doctor__c, Doctor__r.name, Appointment_Date_and_Time__c, (SELECT Name FROM Applications__r) FROM Appointment__c WHERE CreatedById=:you];
+        return appList;
     }
 
 }
