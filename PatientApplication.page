@@ -1,0 +1,71 @@
+<apex:page standardController="Application__c">
+    <apex:form >
+   <apex:pageBlock >
+       <apex:pageBlockSection title="Patient Page" columns="2">
+         <apex:inputField value="{!Application__c.Name__c}" />
+           <apex:inputField value ="{!Application__c.Nickname_Preferred_Name__c}"/>
+         <apex:inputField value="{!Application__c.Date_of_Birth__c}"/>
+         <apex:inputField value="{!Application__c.Age__c}"/>
+         <apex:inputField value="{!Application__c.Gender__c}"/>
+           <apex:inputField value="{!Application__c.Race__c}"/>
+         <apex:inputField value="{!Application__c.SSN__c}"/>
+         <apex:inputField value="{!Application__c.Email__c}"/>
+         <apex:inputField value="{!Application__c.Phone__c}"/>
+       </apex:pageBlockSection>
+       <apex:pageBlockSection title="Patient Address" columns="2">
+         <apex:inputField value="{!Application__c.Address__c}"/>
+         <apex:inputField value="{!Application__c.Apt__c}"/>
+         <apex:inputField value="{!Application__c.City__c}"/>
+         <apex:inputField value="{!Application__c.State__c}"/>
+         <apex:inputField value="{!Application__c.Occupation__c}"/>
+       </apex:pageBlockSection>
+        <apex:pageBlockSection title="In case of Emergency" columns="2">
+       <apex:inputField value="{!Application__c.Emergency_Contact__c}"/>
+       <apex:inputField value="{!Application__c.Relationship__c}"/>
+       <apex:inputField value="{!Application__c.Primary_Phone__c}"/>
+       <apex:inputField value="{!Application__c.Secondary_Phone__c}"/>
+       </apex:pageBlockSection>
+       <apex:pageBlockSection title="Biling Information" columns="2">
+      <apex:inputField value="{!Application__c.Insurance_Carrier__c}"/>
+       <apex:inputField value="{!Application__c.Are_you_the_Subscriber__c}"/>
+       <apex:inputField value="{!Application__c.Subscriber_Name__c}"/>
+   	   <apex:inputField value="{!Application__c.Relation_to_Subscriber__c}"/>
+       <apex:inputField value="{!Application__c.Secondary_Insurance_Carrier__c}"/>
+       <apex:inputField value="{!Application__c.Are_you_the_Subscriber__c}"/>
+    	<apex:inputField value="{!Application__c.Secondary_Subscriber_Name__c}"/> 
+		<apex:inputField value="{!Application__c.Relation_to_Second_Subscriber__c}"/>
+       </apex:pageBlockSection>
+ <apex:pageBlockSection title="Pharmacy" columns="2">
+  <apex:inputField value="{!Application__c.Pharmacy__c}"/>
+  <apex:inputField value="{!Application__c.Pharmacy_Zip_Code__c}"/>
+  <apex:inputField value="{!Application__c.Pharmacy_Address__c}"/>     
+       </apex:pageBlockSection>
+ <apex:pageBlockSection title="Patient Signature" columns="2">
+     <apex:inputField value="{!Application__c.Patient_Signature__c}"/>
+     <apex:inputField value="{!Application__c.Sign_Date__c}"/>
+     <apex:inputField value="{!Application__c.Name__c}"/>
+     <apex:inputField value="{!Application__c.Date_of_Birth__c}"/>
+       </apex:pageBlockSection>      
+       <apex:pageBlockSection title="Medical History" columns="2">
+       
+       
+       </apex:pageBlockSection>
+       <apex:pageBlockSection title="Family and Personal History" columns="4">
+       
+       </apex:pageBlockSection>
+       <apex:pageBlockSection title="Privacy Practices" columns="2">
+       
+       
+       </apex:pageBlockSection>
+       <apex:pageBlockSection title="Preventive Care" columns="3">
+       
+       
+       </apex:pageBlockSection>
+       <apex:pageBlockSection title="Immunizations" columns="3">
+       
+       </apex:pageBlockSection>
+       
+       
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
