@@ -19,87 +19,96 @@
                 
                 
                 <!-- The various filters are displayed here. VF automatically uses the getter and setter methods defined in the controller -->
-                <apex:pageBlock >
-                    <apex:inputText id="mile" value="{!mile}">Mile Radius:</apex:inputText>
+                
+                <apex:inputText id="mile" value="{!mile}">Mile Radius:</apex:inputText>
+                
+                <apex:inputText value="{!zip}">Zip Code:</apex:inputText>
+                
+                <apex:selectList value="{!lang}" multiselect="false" size="1">
+                    Language:
+                    <apex:selectOptions value="{!languages}"></apex:selectOptions>
+                </apex:selectList>
+                
+                <apex:selectList value="{!plan}" multiselect="false" size="1">
+                    Insurance Plan:
+                    <apex:selectOptions value="{!plans}"></apex:selectOptions>
+                </apex:selectList>
+                
+                <apex:selectList value="{!spec}" multiselect="false" size="1">
+                    Specialty:
+                    <apex:selectOptions value="{!specialties}"></apex:selectOptions>
+                </apex:selectList>
+                
+                <apex:selectList value="{!aNP}" multiselect="false" size="1">
+                    Accepting New Patients:
+                    <apex:selectOptions value="{!newpatients}"></apex:selectOptions>
+                </apex:selectList>
+                
+                <!-- Search button which rerenders the below table -->
+                <apex:commandButton status="loading" action="{!search}" reRender="docs" value="Search"/>
+                <!-- This component displays 'loading...' while search results are loading -->
+                <apex:actionStatus id="loading" startText="loading..." stopText="" />
+                
+                <!-- The table of doctors that is displayed -->
+                <apex:dataTable id="docs" value="{!doctors}" var="d">
+                    <!-- Each column displays a different field from the doctor object -->
+                    <apex:column>
+                        <apex:facet name="header">Doctor Name</apex:facet>
+                        <!-- The doctor's name is a link to that doctor's detail page -->
+                        <!-- The correct ID is set to the controller through a JS function when user mouses over the link -->
+                        <apex:commandLink onmouseover="passID('{!d.id}')" action="{!doctorD}">
+                            {!d.name}                            
+                        </apex:commandLink>
+                    </apex:column>
+                    <apex:column>
+                        <apex:facet name="header">Specialty</apex:facet>
+                        {!d.Specialty__c}
+                    </apex:column>
+                    <apex:column id="dzip">
+                        <apex:facet name="header">Zip Code</apex:facet>
+                        {!d.Zip_Code__c}
+                    </apex:column>
+                    <apex:column>
+                        <apex:facet name="header">Languages Spoken</apex:facet>
+                        {!d.Languages__c}
+                    </apex:column>
+                    <apex:column>
+                        <apex:facet name="header">Insurance Plans</apex:facet>
+                        {!d.Plan_Network__c}
+                    </apex:column>
+                    <apex:column>
+                        <apex:facet name="header">Accepting New Patients?</apex:facet>
+                        {!d.Accepting_New_Patients__c}
+                    </apex:column>
                     
-                    <apex:inputText value="{!zip}">Zip Code:</apex:inputText>
-                    
-                    <apex:selectList value="{!lang}" multiselect="false" size="1">
-                        Language:
-                        <apex:selectOptions value="{!languages}"></apex:selectOptions>
-                    </apex:selectList>
-                    
-                    <apex:selectList value="{!plan}" multiselect="false" size="1">
-                        Insurance Plan:
-                        <apex:selectOptions value="{!plans}"></apex:selectOptions>
-                    </apex:selectList>
-                    
-                    <apex:selectList value="{!spec}" multiselect="false" size="1">
-                        Specialty:
-                        <apex:selectOptions value="{!specialties}"></apex:selectOptions>
-                    </apex:selectList>
-                    
-                    <apex:selectList value="{!aNP}" multiselect="false" size="1">
-                        Accepting New Patients:
-                        <apex:selectOptions value="{!newpatients}"></apex:selectOptions>
-                    </apex:selectList>
-                    
-                    <!-- Search button which rerenders the below table -->
-                    <apex:commandButton status="loading" action="{!search}" reRender="docs" value="Search"/>
-                    <!-- This component displays 'loading...' while search results are loading -->
-                    <apex:actionStatus id="loading" startText="loading..." stopText="" />
-                </apex:pageBlock>
-                <apex:pageBlock >
-                    
-                    <apex:pageBlockSection >
-                        <!-- The table of doctors that is displayed -->
-                        <apex:pageBlockTable id="docs" value="{!doctors}" var="d">
-                            <!-- Each column displays a different field from the doctor object -->
-                            <apex:column headerValue="Doctor Name" >
-                                <!-- The doctor's name is a link to that doctor's detail page -->
-                                <!-- The correct ID is set to the controller through a JS function when user mouses over the link -->
-                                <apex:commandLink onmouseover="passID('{!d.id}')" action="{!doctorD}">
-                                    {!d.name}                            
-                                </apex:commandLink>
-                            </apex:column>
-                            <apex:column headerValue="Specialty">
-                                {!d.Specialty__c}
-                            </apex:column>
-                            <apex:column headerValue="Zip Code" id="dzip">
-                                {!d.Zip_Code__c}
-                            </apex:column>
-                            <apex:column headerValue="Languages Spoken">
-                                {!d.Languages__c}
-                            </apex:column>
-                            <apex:column headerValue="Insurance Plans">
-                                {!d.Plan_Network__c}
-                            </apex:column>
-                            <apex:column headerValue="Accepting New Patients?">
-                                {!d.Accepting_New_Patients__c}
-                            </apex:column>
-                            
-                        </apex:pageBlockTable>
-                        <apex:commandButton action="{!pdfpage}" value="View as PDF"/>
-                        
-                    </apex:pageBlockSection>
-                </apex:pageBlock>  
+                </apex:dataTable>
+                <apex:commandButton action="{!pdfpage}" value="View as PDF"/>
+                
+                
                 <!-- Hidden input passes ID to controller -->
                 <apex:inputHidden id="docid" value="{!docID}"/>
                 
             </apex:tab>
             <!--This tab contains the list of current user's past appointments-->
             <apex:tab label="Past Appointments" name="pastapps">
-                <apex:pageBlock>
-                    <apex:pageBlockTable value="{!apps}" var="a">
-                        <apex:column headerValue="Doctor's Name">
-                            <apex:commandLink onmouseover="passID('{!a.Doctor__c}')" action="{!doctorD}">
-                                {!a.Doctor__r.name}                          
-                            </apex:commandLink>
-                        </apex:column>
-                        <apex:column value="{!a.Appointment_Date_and_Time__c}"/>
-                        <apex:column value="{!a.Applications__r[0].name}"/>
-                    </apex:pageBlockTable>
-                </apex:pageBlock>
+                
+                <apex:dataTable value="{!apps}" var="a">
+                    <apex:column>
+                        <apex:facet name="header">Doctor Name</apex:facet>
+                        <apex:commandLink onmouseover="passID('{!a.Doctor__c}')" action="{!doctorD}">
+                            {!a.Doctor__r.name}                          
+                        </apex:commandLink>
+                    </apex:column>
+                    <apex:column>
+                        <apex:facet name="header">Appointment Date and Time</apex:facet>
+                        {!a.Appointment_Date_and_Time__c}
+                    </apex:column>
+                    <apex:column>
+                        <apex:facet name="header">Application</apex:facet>
+                        {!a.Applications__r[0].name}
+                    </apex:column>
+                </apex:dataTable>
+                
             </apex:tab>
         </apex:tabPanel>
     </apex:form>
