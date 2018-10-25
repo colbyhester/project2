@@ -1,9 +1,9 @@
-<apex:page standardController="Application__c">
+<apex:page standardController="Application__c" lightningStylesheets="true">
     <apex:form >
    <apex:pageBlock >
        <apex:pageBlockSection title="Patient Page" columns="2">
          <apex:inputField value="{!Application__c.Name__c}" />
-           <apex:inputField value ="{!Application__c.Nickname_Preferred_Name__c}"/>
+           <apex:inputField value="{!Application__c.Nickname_Preferred_Name__c}"/>
          <apex:inputField value="{!Application__c.Date_of_Birth__c}"/>
          <apex:inputField value="{!Application__c.Age__c}"/>
          <apex:inputField value="{!Application__c.Gender__c}"/>
@@ -45,26 +45,62 @@
      <apex:inputField value="{!Application__c.Sign_Date__c}"/>
      <apex:inputField value="{!Application__c.Name__c}"/>
      <apex:inputField value="{!Application__c.Date_of_Birth__c}"/>
-       </apex:pageBlockSection>      
-       <apex:pageBlockSection title="Medical History" columns="2">
+       </apex:pageBlockSection>  
+       <apex:pageBlockSection title="Primary care physician" columns="2">
+           <apex:inputField value="{!Application__c.Primary_Care_Physician__c}" />
+       <apex:inputField value="{!Application__c.If_Not_Primary_Physician__c}"/>
+      </apex:pageBlockSection>
        
-       
-       </apex:pageBlockSection>
-       <apex:pageBlockSection title="Family and Personal History" columns="4">
-       
-       </apex:pageBlockSection>
-       <apex:pageBlockSection title="Privacy Practices" columns="2">
-       
-       
-       </apex:pageBlockSection>
-       <apex:pageBlockSection title="Preventive Care" columns="3">
-       
-       
-       </apex:pageBlockSection>
-       <apex:pageBlockSection title="Immunizations" columns="3">
-       
+       <apex:pageBlockSection title="Social History" columns="3">
+      <apex:inputField value="{!Application__c.Current_Smoker__c}"/>
+      <apex:inputField value="{!Application__c.Former_Smoker__c}"/>
+      <apex:inputField value="{!Application__c.Chewing_Tobacco__c}"/>
+      <apex:inputField value="{!Application__c.Do_you_drink_Alcohol__c}"/>
+      <apex:inputField value="{!Application__c.Is_it_a_problem__c}"/>
+     <apex:inputField value="{!Application__c.Do_you_Exercise__c}"/>
+     <apex:inputField value="{!Application__c.Hobbies__c}"/>
+      <apex:inputField value="{!Application__c.Number_of_Children__c}"/>
+      <apex:inputField value="{!Application__c.Age__c}"/>     
        </apex:pageBlockSection>
        
+       <apex:pageBlockSection title="Surgical History">
+            List Surgeries and/or hospitalization you have had with Date 
+       <apex:inputField value="{!Application__c.None__c}"/>
+       <apex:inputField value="{!Application__c.List_Surgeries_or_Hospitalizations__c}"/>
+   </apex:pageBlockSection>
+       
+       <apex:pageBlockSection title="Ongoing Medical Issues">
+           Any ongoing medical issues? If so List them, if not select None.
+       <apex:inputField value="{!Application__c.None__c}"/>
+       <apex:inputField value="{!Application__c.Ongoing_Medical_Issues__c}"/>
+       </apex:pageBlockSection>
+       
+       <apex:pageBlockSection title="Allergies" columns="2">
+         Do you have seasonal, environmental, or food allergies?
+       <apex:inputField value="{!Application__c.None__c}"/>
+       <apex:inputField value="{!Application__c.Any_Allergies__c}"/>                                                  
+       </apex:pageBlockSection>
+       <apex:pageBlockSection title="Medication Allergies">
+           <apex:inputField value="{!Application__c.None__c}"/>
+       <apex:inputField value="{!Application__c.Any_allergies_to_Medication__c}"/>
+       </apex:pageBlockSection>
+       
+       <apex:pageBlockSection title="Family and Personal History" columns="2">
+      Specify if you or a blood-relative have or had any of the following
+           <apex:inputField value="{!Application__c.Family_and_Personal_History__c}"/>   
+       <apex:inputField value="{!Application__c.Relative__c}"/>
+        <apex:inputField value="{!Application__c.Sign_Date__c}"/>
+     <apex:inputField value="{!Application__c.Name__c}"/>
+     <apex:inputField value="{!Application__c.Date_of_Birth__c}"/>  
+       </apex:pageBlockSection>
+       <apex:pageBlockSection title="Consent To Treatment">
+           
+       
+       </apex:pageBlockSection>
+       
+         <apex:commandButton action="{!Save}" value="Save">
+    </apex:commandButton>
         </apex:pageBlock>
     </apex:form>
+  
 </apex:page>
