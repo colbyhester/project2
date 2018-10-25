@@ -1,8 +1,19 @@
-<apex:page standardController="Doctor__c" extensions="DoctorControllerExtension">
+<apex:page lightningStylesheets="true" standardController="Doctor__c" extensions="DoctorControllerExtension">
+    <head>
+        
+        
+        <style>
+            #div1{
+            display:flex;
+            flex-direction:row;
+            
+            }
+        </style>
+    </head>
     <apex:pageBlock >
         <!-- Custom Doctor detail page. Linked to by SearchPage -->
         <apex:pageBlockSection >
-        	<apex:outputField value="{!Doctor__c.name}"/>
+            <apex:outputField value="{!Doctor__c.name}"/>
             <apex:outputField value="{!Doctor__c.Office_Address__c}"/>
             <apex:outputField value="{!Doctor__c.City__c}"/>
             <apex:outputField value="{!Doctor__c.State__c}"/>
@@ -15,10 +26,25 @@
             <apex:outputField value="{!Doctor__c.Plan_Network__c}"/>
         </apex:pageBlockSection>
         <apex:pageBlockSection >
-        	<apex:form >
+            <apex:form >
                 <!-- Button that links to the Book Appointment Page-->
-            	<apex:commandButton action="{!bookApp}" value="Book Appointment"/>
+                <div id='div1'>
+                    <div style='width:45vw'>
+                        
+                    </div>
+                    <div >
+                        
+                        
+                        
+                        <apex:commandButton action="{!bookApp}" value="Book Appointment"/>
+                    </div>
+                </div>
             </apex:form>
         </apex:pageBlockSection>
     </apex:pageBlock>
+    <script>
+    let butt = document.querySelector('.btn');
+    butt.style='color:white; background-color:#77AFDF';
+    
+    </script>
 </apex:page>
