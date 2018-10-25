@@ -93,11 +93,21 @@
      <apex:inputField value="{!Application__c.Name__c}"/>
      <apex:inputField value="{!Application__c.Date_of_Birth__c}"/>  
        </apex:pageBlockSection>
+      
        <apex:pageBlockSection title="Consent To Treatment">
-           
-       
+     <apex:inputField value="{!Application__c.PatientName__c}"/>
+      <apex:inputField value="{!Application__c.PatientDOB__c}"/> 
+       <apex:inputField value="{!Application__c.DateSign__c}"/>     
+       <apex:inputField value="{!Application__c.SigPatientName__c}"/>
        </apex:pageBlockSection>
        
+        <apex:pageBlockSection title="Controlled Substance Agreement">
+     <apex:inputField value="{!Application__c.PatientName__c}"/>
+      <apex:inputField value="{!Application__c.PatientDOB__c}"/> 
+       <apex:inputField value="{!Application__c.DateSign__c}"/>     
+       <apex:inputField value="{!Application__c.SigPatientName__c}"/>
+       </apex:pageBlockSection>
+
          <apex:commandButton action="{!Save}" value="Save">
     </apex:commandButton>
         </apex:pageBlock>
