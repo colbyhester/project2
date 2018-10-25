@@ -1,6 +1,6 @@
 <apex:page renderAs="PDF" controller="SearchPageController">
-    <apex:pageBlock>
-        <apex:pageBlockSection>
+    <apex:pageBlock >
+        <apex:pageBlockSection >
             <apex:pageBlockTable id="docs" value="{!dlist}" var="d">
                 <!-- Each column displays a different field from the doctor object -->
                 <apex:column headerValue="Doctor Name" >

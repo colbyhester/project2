@@ -144,11 +144,11 @@ public class SearchPageController {
             req.setMethod('GET');
             //This URL calls the api with the specified zip code values. In order for this to work, you have to add https://maps.googleapis.com to your org's Remote Sites (type Remote Site in Quick Find Box)
             if(distanceFilter=='zipcode'){
-            	req.setEndpoint('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+zip+'&destinations='+fullList[i].Zip_Code__c+'&language=en&units=imperial&sensor=false&key=AIzaSyBUcAx046byoKwvtNMpxbTNkz-F0PwA7ao');
+                req.setEndpoint('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+zip+'&destinations='+fullList[i].Zip_Code__c+'&language=en&units=imperial&sensor=false&key=AIzaSyBUcAx046byoKwvtNMpxbTNkz-F0PwA7ao');
             }else if(distanceFilter=='currentLocation'){
                 req.setEndpoint('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+','+lon+'&destinations='+fullList[i].Zip_Code__c+'&language=en&units=imperial&sensor=false&key=AIzaSyBUcAx046byoKwvtNMpxbTNkz-F0PwA7ao');
                 //System.debug('https://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+','+lon+'&destinations='+fullList[i].Zip_Code__c+'&language=en&units=imperial&sensor=false&key=AIzaSyBUcAx046byoKwvtNMpxbTNkz-F0PwA7ao');
-
+                
             }
             resp = http.send(req);
             //System.debug('------resp-----------'+resp.getBody());
@@ -267,26 +267,37 @@ public class SearchPageController {
     
     //ID of the doctor the user is about to click on(updated onmouseover)
     public String docID{get;set;}
+    public String appID{get;set;}
     
     //Method called when user clicks a doctor's name
     public PageReference doctorD(){
         
-		//link to DoctorDetail page with specified doctor's ID
+        //link to DoctorDetail page with specified doctor's ID
         PageReference Page = new PageReference('/apex/DoctorDetail?id='+docID);
-		
-    	Page.setRedirect(true);
-
-   		return Page;
+        
+        Page.setRedirect(true);
+        
+        return Page;
+    }
+    
+    public PageReference appD(){
+        
+        //link to DoctorDetail page with specified doctor's ID
+        PageReference Page = new PageReference('/apex/ApplicationPage?id='+appID);
+        
+        Page.setRedirect(true);
+        
+        return Page;
     }
     
     //Method that opens up the search results as a PDF
     public PageReference pdfPage(){
         
         PageReference Page = new PageReference('/apex/DoctorPDF');
-		
-    	Page.setRedirect(false);
-
-   		return Page;
+        
+        Page.setRedirect(false);
+        
+        return Page;
     }
     
     //Method that queries for the current user's Appointments
@@ -295,5 +306,5 @@ public class SearchPageController {
         List<Appointment__c> appList = [SELECT Doctor__c, Doctor__r.name, Appointment_Date_and_Time__c, (SELECT Name FROM Applications__r) FROM Appointment__c WHERE CreatedById=:you];
         return appList;
     }
-
+    
 }

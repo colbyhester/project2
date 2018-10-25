@@ -1,0 +1,116 @@
+<apex:page standardController="Appointment__c" extensions="AppointmentExtension" lightningStylesheets="true">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Patient Page" columns="2">
+                <apex:inputField value="{!a['Name__c']}" />
+                <apex:inputField value="{!a['Nickname_Preferred_Name__c']}"/>
+                <apex:inputField value="{!a['Date_of_Birth__c']}"/>
+                <apex:inputField value="{!a['Age__c']}"/>
+                <apex:inputField value="{!a['Gender__c']}"/>
+                <apex:inputField value="{!a['Race__c']}"/>
+                <apex:inputField value="{!a['SSN__c']}"/>
+                <apex:inputField value="{!a['Email__c']}"/>
+                <apex:inputField value="{!a['Phone__c']}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Patient Address" columns="2">
+                <apex:inputField value="{!a['Address__c']}"/>
+                <apex:inputField value="{!a['Apt__c']}"/>
+                <apex:inputField value="{!a['City__c']}"/>
+                <apex:inputField value="{!a['State__c']}"/>
+                <apex:inputField value="{!a['Occupation__c']}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="In case of Emergency" columns="2">
+                <apex:inputField value="{!a['Emergency_Contact__c']}"/>
+                <apex:inputField value="{!a['Relationship__c']}"/>
+                <apex:inputField value="{!a['Primary_Phone__c']}"/>
+                <apex:inputField value="{!a['Secondary_Phone__c']}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Biling Information" columns="2">
+                <apex:inputField value="{!a['Insurance_Carrier__c']}"/>
+                <apex:inputField value="{!a['Are_you_the_Subscriber__c']}"/>
+                <apex:inputField value="{!a['Subscriber_Name__c']}"/>
+                <apex:inputField value="{!a['Relation_to_Subscriber__c']}"/>
+                <apex:inputField value="{!a['Secondary_Insurance_Carrier__c']}"/>
+                <apex:inputField value="{!a['Are_you_the_Subscriber__c']}"/>
+                <apex:inputField value="{!a['Secondary_Subscriber_Name__c']}"/> 
+                <apex:inputField value="{!a['Relation_to_Second_Subscriber__c']}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Pharmacy" columns="2">
+                <apex:inputField value="{!a['Pharmacy__c']}"/>
+                <apex:inputField value="{!a['Pharmacy_Zip_Code__c']}"/>
+                <apex:inputField value="{!a['Pharmacy_Address__c']}"/>     
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Patient Signature" columns="2">
+                <apex:inputField value="{!a['Patient_Signature__c']}"/>
+                <apex:inputField value="{!a['Sign_Date__c']}"/>
+                <apex:inputField value="{!a['Name__c']}"/>
+                <apex:inputField value="{!a['Date_of_Birth__c']}"/>
+            </apex:pageBlockSection>  
+            <apex:pageBlockSection title="Primary care physician" columns="2">
+                <apex:inputField value="{!a['Primary_Care_Physician__c']}" />
+                <apex:inputField value="{!a['If_Not_Primary_Physician__c']}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Social History" columns="3">
+                <apex:inputField value="{!a['Current_Smoker__c']}"/>
+                <apex:inputField value="{!a['Former_Smoker__c']}"/>
+                <apex:inputField value="{!a['Chewing_Tobacco__c']}"/>
+                <apex:inputField value="{!a['Do_you_drink_Alcohol__c']}"/>
+                <apex:inputField value="{!a['Is_it_a_problem__c']}"/>
+                <apex:inputField value="{!a['Do_you_Exercise__c']}"/>
+                <apex:inputField value="{!a['Hobbies__c']}"/>
+                <apex:inputField value="{!a['Number_of_Children__c']}"/>
+                <apex:inputField value="{!a['Age__c']}"/>     
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Surgical History">
+                List Surgeries and/or hospitalization you have had with Date 
+                <apex:inputField value="{!a['None__c']}"/>
+                <apex:inputField value="{!a['List_Surgeries_or_Hospitalizations__c']}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Ongoing Medical Issues">
+                Any ongoing medical issues? If so List them, if not select None.
+                <apex:inputField value="{!a['None__c']}"/>
+                <apex:inputField value="{!a['Ongoing_Medical_Issues__c']}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Allergies" columns="2">
+                Do you have seasonal, environmental, or food allergies?
+                <apex:inputField value="{!a['None__c']}"/>
+                <apex:inputField value="{!a['Any_Allergies__c']}"/>                                                  
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Medication Allergies">
+                <apex:inputField value="{!a['None__c']}"/>
+                <apex:inputField value="{!a['Any_allergies_to_Medication__c']}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Family and Personal History" columns="2">
+                Specify if you or a blood-relative have or had any of the following
+                <apex:inputField value="{!a['Family_and_Personal_History__c']}"/>   
+                <apex:inputField value="{!a['Relative__c']}"/>
+                <apex:inputField value="{!a['Sign_Date__c']}"/>
+                <apex:inputField value="{!a['Name__c']}"/>
+                <apex:inputField value="{!a['Date_of_Birth__c']}"/>  
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Consent To Treatment">
+                <apex:inputField value="{!a['PatientName__c']}"/>
+                <apex:inputField value="{!a['PatientDOB__c']}"/> 
+                <apex:inputField value="{!a['DateSign__c']}"/>     
+                <apex:inputField value="{!a['SigPatientName__c']}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Controlled Substance Agreement">
+                <apex:inputField value="{!a['PatientName__c']}"/>
+                <apex:inputField value="{!a['PatientDOB__c']}"/> 
+                <apex:inputField value="{!a['DateSign__c']}"/>     
+                <apex:inputField value="{!a['SigPatientName__c']}"/>
+            </apex:pageBlockSection>
+            
+            <apex:commandButton action="{!saveApp}" value="Save">
+            </apex:commandButton>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

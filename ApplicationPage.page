@@ -1,0 +1,14 @@
+<apex:page lightningStylesheets="true" standardController="Application__c">
+    <apex:detail relatedList="false" />
+    <script>
+    let butts = document.querySelectorAll('.btn');
+    for(let i=0;i<butts.length;i++){
+        butts[i].style = 'display:none';    
+        
+        
+    }
+    
+    
+    </script>
+    
+</apex:page>
