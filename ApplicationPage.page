@@ -1,14 +1,119 @@
-<apex:page lightningStylesheets="true" standardController="Application__c">
-    <apex:detail relatedList="false" />
+<apex:page lightningStylesheets="true" standardController="Application__c">    
+    <head>        
+        <style>
+            #div2{
+            display:flex;
+            justify-content: flex-end;
+            }
+        </style>
+    </head>   
+    <div id='div2'>
+        <input type="button" onClick="logOut();" value="Logout" />
+    </div>
+    <apex:pageBlock>
+        <apex:pageBlockSection title="Patient Page" columns="2">
+            <apex:outputField value="{!Application__c.Name__c}" />
+            <apex:outputField value="{!Application__c.Nickname_Preferred_Name__c}"/>
+            <apex:outputField value="{!Application__c.Date_of_Birth__c}"/>
+            <apex:outputField value="{!Application__c.Age__c}"/>
+            <apex:outputField value="{!Application__c.Gender__c}"/>
+            <apex:outputField value="{!Application__c.Race__c}"/>
+            <apex:outputField value="{!Application__c.SSN__c}"/>
+            <apex:outputField value="{!Application__c.Email__c}"/>
+            <apex:outputField value="{!Application__c.Phone__c}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Patient Address" columns="2">
+            <apex:outputField value="{!Application__c.Address__c}"/>
+            <apex:outputField value="{!Application__c.Apt__c}"/>
+            <apex:outputField value="{!Application__c.City__c}"/>
+            <apex:outputField value="{!Application__c.State__c}"/>
+            <apex:outputField value="{!Application__c.Occupation__c}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="In case of Emergency" columns="2">
+            <apex:outputField value="{!Application__c.Emergency_Contact__c}"/>
+            <apex:outputField value="{!Application__c.Relationship__c}"/>
+            <apex:outputField value="{!Application__c.Primary_Phone__c}"/>
+            <apex:outputField value="{!Application__c.Secondary_Phone__c}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Biling Information" columns="2">
+            <apex:outputField value="{!Application__c.Insurance_Carrier__c}"/>
+            <apex:outputField value="{!Application__c.Are_you_the_Subscriber__c}"/>
+            <apex:outputField value="{!Application__c.Subscriber_Name__c}"/>
+            <apex:outputField value="{!Application__c.Relation_to_Subscriber__c}"/>
+            <apex:outputField value="{!Application__c.Secondary_Insurance_Carrier__c}"/>
+            <apex:outputField value="{!Application__c.Are_you_the_Subscriber__c}"/>
+            <apex:outputField value="{!Application__c.Secondary_Subscriber_Name__c}"/> 
+            <apex:outputField value="{!Application__c.Relation_to_Second_Subscriber__c}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Pharmacy" columns="2">
+            <apex:outputField value="{!Application__c.Pharmacy__c}"/>
+            <apex:outputField value="{!Application__c.Pharmacy_Zip_Code__c}"/>
+            <apex:outputField value="{!Application__c.Pharmacy_Address__c}"/>     
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Patient Signature" columns="2">
+            <apex:outputField value="{!Application__c.Patient_Signature__c}"/>
+            <apex:outputField value="{!Application__c.Sign_Date__c}"/>
+            <apex:outputField value="{!Application__c.Name__c}"/>
+            <apex:outputField value="{!Application__c.Date_of_Birth__c}"/>
+        </apex:pageBlockSection>  
+        <apex:pageBlockSection title="Primary care physician" columns="2">
+            <apex:outputField value="{!Application__c.Primary_Care_Physician__c}" />
+            <apex:outputField value="{!Application__c.If_Not_Primary_Physician__c}"/>
+        </apex:pageBlockSection>            
+        <apex:pageBlockSection title="Social History" columns="3">
+            <apex:outputField value="{!Application__c.Current_Smoker__c}"/>
+            <apex:outputField value="{!Application__c.Former_Smoker__c}"/>
+            <apex:outputField value="{!Application__c.Chewing_Tobacco__c}"/>
+            <apex:outputField value="{!Application__c.Do_you_drink_Alcohol__c}"/>
+            <apex:outputField value="{!Application__c.Is_it_a_problem__c}"/>
+            <apex:outputField value="{!Application__c.Do_you_Exercise__c}"/>
+            <apex:outputField value="{!Application__c.Hobbies__c}"/>
+            <apex:outputField value="{!Application__c.Number_of_Children__c}"/>
+            <apex:outputField value="{!Application__c.Age__c}"/>     
+        </apex:pageBlockSection>            
+        <apex:pageBlockSection title="Surgical History">
+            List Surgeries and/or hospitalization you have had with Date 
+            <apex:outputField value="{!Application__c.None__c}"/>
+            <apex:outputField value="{!Application__c.List_Surgeries_or_Hospitalizations__c}"/>
+        </apex:pageBlockSection>            
+        <apex:pageBlockSection title="Ongoing Medical Issues">
+            Any ongoing medical issues? If so List them, if not select None.
+            <apex:outputField value="{!Application__c.None__c}"/>
+            <apex:outputField value="{!Application__c.Ongoing_Medical_Issues__c}"/>
+        </apex:pageBlockSection>           
+        <apex:pageBlockSection title="Allergies" columns="2">
+            Do you have seasonal, environmental, or food allergies?
+            <apex:outputField value="{!Application__c.None__c}"/>
+            <apex:outputField value="{!Application__c.Any_Allergies__c}"/>                                                  
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Medication Allergies">
+            <apex:outputField value="{!Application__c.None__c}"/>
+            <apex:outputField value="{!Application__c.Any_allergies_to_Medication__c}"/>
+        </apex:pageBlockSection>            
+        <apex:pageBlockSection title="Family and Personal History" columns="2">
+            Specify if you or a blood-relative have or had any of the following
+            <apex:outputField value="{!Application__c.Family_and_Personal_History__c}"/>   
+            <apex:outputField value="{!Application__c.Relative__c}"/>
+            <apex:outputField value="{!Application__c.Sign_Date__c}"/>
+            <apex:outputField value="{!Application__c.Name__c}"/>
+            <apex:outputField value="{!Application__c.Date_of_Birth__c}"/>  
+        </apex:pageBlockSection>            
+        <apex:pageBlockSection title="Consent To Treatment">
+            <apex:outputField value="{!Application__c.PatientName__c}"/>
+            <apex:outputField value="{!Application__c.PatientDOB__c}"/> 
+            <apex:outputField value="{!Application__c.DateSign__c}"/>     
+            <apex:outputField value="{!Application__c.SigPatientName__c}"/>
+        </apex:pageBlockSection> 
+        <apex:pageBlockSection title="Controlled Substance Agreement">
+            <apex:outputField value="{!Application__c.PatientName__c}"/>
+            <apex:outputField value="{!Application__c.PatientDOB__c}"/> 
+            <apex:outputField value="{!Application__c.DateSign__c}"/>     
+            <apex:outputField value="{!Application__c.SigPatientName__c}"/>
+        </apex:pageBlockSection>            
+    </apex:pageBlock>
     <script>
-    let butts = document.querySelectorAll('.btn');
-    for(let i=0;i<butts.length;i++){
-        butts[i].style = 'display:none';    
-        
-        
+    function logOut(){
+        window.location.replace("{!$Site.Prefix}/secur/logout.jsp");
     }
-    
-    
-    </script>
-    
+    </script>   
 </apex:page>

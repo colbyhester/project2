@@ -1,5 +1,5 @@
 public class DoctorControllerExtension {
-	private final Doctor__c doc;
+    public Doctor__c doc{get;set;}
     public Appointment__c app{get;set;}
     public String zip{get;set;}
     
@@ -23,14 +23,14 @@ public class DoctorControllerExtension {
         
         app.Doctor__c = doc.ID;
 
-        insert app;
+        //insert app;
         //create a child Application(temporary until application is done)
         //Application__c a = new Application__c();
         //a.Appointment__c = app.ID;
         //insert a;
         
         //this page will link to the Application page in the future. Right now it links to the appointment detail page
-        PageReference Page = new PageReference('/apex/patientapplication?id='+app.ID);
+        PageReference Page = new PageReference('/apex/patientapplication?did='+doc.ID+'&adt='+app.Appointment_Date_and_Time__c.format()+'&em='+app.Patient_Email__c+'&ph='+app.Patient_Phone_Number__c);
         return Page;
     }
 }

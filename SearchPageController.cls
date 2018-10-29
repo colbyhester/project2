@@ -307,4 +307,9 @@ public class SearchPageController {
         return appList;
     }
     
+    public PageReference logout(){
+        
+        return new PageReference('/secur/logout.jsp');
+    }
+    
 }

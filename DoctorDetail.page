@@ -1,15 +1,19 @@
 <apex:page lightningStylesheets="true" standardController="Doctor__c" extensions="DoctorControllerExtension">
     <head>
-        
-        
         <style>
             #div1{
             display:flex;
-            flex-direction:row;
-            
+            flex-direction:row;            
             }
+            #div2{
+            display:flex;
+            justify-content: flex-end;
+            } 
         </style>
     </head>
+    <div id='div2'>
+        <input type="button" onClick="logOut();" value="Logout" />
+    </div>
     <apex:pageBlock >
         <!-- Custom Doctor detail page. Linked to by SearchPage -->
         <apex:pageBlockSection >
@@ -29,13 +33,9 @@
             <apex:form >
                 <!-- Button that links to the Book Appointment Page-->
                 <div id='div1'>
-                    <div style='width:45vw'>
-                        
+                    <div style='width:45vw'>     
                     </div>
                     <div >
-                        
-                        
-                        
                         <apex:commandButton action="{!bookApp}" value="Book Appointment"/>
                     </div>
                 </div>
@@ -44,7 +44,9 @@
     </apex:pageBlock>
     <script>
     let butt = document.querySelector('.btn');
-    butt.style='color:white; background-color:#77AFDF';
-    
+    butt.style=' background-color:#77AFDF';     
+    function logOut(){
+        window.location.replace("{!$Site.Prefix}/secur/logout.jsp");
+    }
     </script>
 </apex:page>

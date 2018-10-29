@@ -6,8 +6,7 @@
                 <apex:column headerValue="Doctor Name" >
                     <!-- The doctor's name is a link to that doctor's detail page -->
                     <!-- The correct ID is set to the controller through a JS function when user mouses over the link -->
-                    {!d.name}                            
-                    
+                    {!d.name}                               
                 </apex:column>
                 <apex:column headerValue="Specialty">
                     {!d.Specialty__c}
@@ -23,8 +22,7 @@
                 </apex:column>
                 <apex:column headerValue="Accepting New Patients?">
                     {!d.Accepting_New_Patients__c}
-                </apex:column>
-                
+                </apex:column>  
             </apex:pageBlockTable>
         </apex:pageBlockSection>
     </apex:pageBlock>

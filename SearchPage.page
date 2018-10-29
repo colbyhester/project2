@@ -3,8 +3,11 @@
         <style>
             #div1{
             display:flex;
-            flex-direction:row;
-            
+            flex-direction:row;            
+            }
+            #div2{
+            display:flex;
+            justify-content: flex-end;            
             }
             body .rich-tabhdr-cell-active, .slds-scope .rich-tabhdr-cell-active {
             border-bottom-color: #0070d2 !important;
@@ -21,151 +24,128 @@
             }
         </style>
     </head>
-    <apex:form id="form1">  <!-- we need a form to take in user input -->
-        
-        <apex:tabPanel switchType="client">
-            <!--This tab contains the search page-->
-            <apex:tab label="Search" name="search">
-                
-                <!-- inputHiddens pass lat and lon to controller -->
-                <apex:inputHidden id="lat" value="{!lat}"></apex:inputHidden>
-                <apex:inputHidden id="lon" value="{!lon}"></apex:inputHidden>
-                
-                <!-- user specifies how they want distance to doctors calculated -->
-                <apex:selectRadio value="{!distanceFilter}" onclick="getLocation()">
-                    <apex:selectOption itemValue="zipcode" itemLabel="Enter a Zip Code"></apex:selectOption>
-                    <apex:selectOption itemValue="currentLocation" itemLabel="Use Current Location"></apex:selectOption>    
-                </apex:selectRadio>
-                
-                
-                
-                
-                <!-- The various filters are displayed here. VF automatically uses the getter and setter methods defined in the controller -->
-                <apex:pageBlock >
-                    <apex:inputText id="mile" value="{!mile}">Mile Radius:&nbsp;&nbsp;</apex:inputText>
-                    
-                    <apex:inputText value="{!zip}">&nbsp;&nbsp;&nbsp;Zip Code:&nbsp;</apex:inputText>
-                    
-                    <apex:selectList value="{!lang}" multiselect="false" size="1">
-                        &nbsp;&nbsp;Language:&nbsp;
-                        <apex:selectOptions value="{!languages}"></apex:selectOptions>
-                    </apex:selectList>
-                    
-                    <apex:selectList value="{!plan}" multiselect="false" size="1">
-                        &nbsp;&nbsp;Insurance Plan:&nbsp;
-                        <apex:selectOptions value="{!plans}"></apex:selectOptions>
-                    </apex:selectList>
-                    
-                    <apex:selectList value="{!spec}" multiselect="false" size="1">
-                        &nbsp;&nbsp;Specialty:&nbsp;
-                        <apex:selectOptions value="{!specialties}"></apex:selectOptions>
-                    </apex:selectList>
-                    
-                    <apex:selectList value="{!aNP}" multiselect="false" size="1">
-                        &nbsp;&nbsp;Accepting New Patients:&nbsp;
-                        <apex:selectOptions value="{!newpatients}"></apex:selectOptions>
-                    </apex:selectList>
-                    
-                    <!-- Search button which rerenders the below table -->
-                    <apex:commandButton status="loading" action="{!search}" reRender="docs" value="Search"/>
-                    <!-- This component displays 'loading...' while search results are loading -->
-                    &nbsp;&nbsp;<apex:actionStatus id="loading" startText="Loading Results..." stopText="" />
-                </apex:pageBlock>
-                <apex:pageBlock >
-                    <div id='div1'>
-                        
-                        
-                        <div id='div2' style='width:20vw'>
-                            
+    <apex:form id="form1">  <!-- we need a form to take in user input -->       
+        <div id='div2'>
+            <input type="button" onClick="logOut();" value="Logout" />
+        </div>
+        <apex:pageBlock >
+            <apex:tabPanel switchType="client">
+                <!--This tab contains the search page-->
+                <apex:tab label="Search" name="search">                
+                    <!-- inputHiddens pass lat and lon to controller -->
+                    <apex:inputHidden id="lat" value="{!lat}"></apex:inputHidden>
+                    <apex:inputHidden id="lon" value="{!lon}"></apex:inputHidden>                
+                    <!-- user specifies how they want distance to doctors calculated -->
+                    <apex:selectRadio value="{!distanceFilter}" onclick="getLocation()">
+                        <apex:selectOption itemValue="zipcode" itemLabel="Enter a Zip Code"></apex:selectOption>
+                        <apex:selectOption itemValue="currentLocation" itemLabel="Use Current Location"></apex:selectOption>    
+                    </apex:selectRadio>
+                    <!-- The various filters are displayed here. VF automatically uses the getter and setter methods defined in the controller -->
+                    <apex:pageBlock >
+                        <apex:inputText id="mile" value="{!mile}">Mile Radius:&nbsp;&nbsp;</apex:inputText>
+                        <apex:inputText value="{!zip}">&nbsp;&nbsp;&nbsp;Zip Code:&nbsp;</apex:inputText>       
+                        <apex:selectList value="{!lang}" multiselect="false" size="1">
+                            &nbsp;&nbsp;Language:&nbsp;
+                            <apex:selectOptions value="{!languages}"></apex:selectOptions>
+                        </apex:selectList>            
+                        <apex:selectList value="{!plan}" multiselect="false" size="1">
+                            &nbsp;&nbsp;Insurance Plan:&nbsp;
+                            <apex:selectOptions value="{!plans}"></apex:selectOptions>
+                        </apex:selectList>                    
+                        <apex:selectList value="{!spec}" multiselect="false" size="1">
+                            &nbsp;&nbsp;Specialty:&nbsp;
+                            <apex:selectOptions value="{!specialties}"></apex:selectOptions>
+                        </apex:selectList>                    
+                        <apex:selectList value="{!aNP}" multiselect="false" size="1">
+                            &nbsp;&nbsp;Accepting New Patients:&nbsp;
+                            <apex:selectOptions value="{!newpatients}"></apex:selectOptions>
+                        </apex:selectList>                    
+                        <!-- Search button which rerenders the below table -->
+                        &nbsp;&nbsp;<apex:commandButton status="loading" action="{!search}" reRender="docs" value="Search"/>
+                        <!-- This component displays 'loading...' while search results are loading -->
+                        &nbsp;&nbsp;<apex:actionStatus id="loading" startText="Loading Results..." stopText="" />
+                    </apex:pageBlock>
+                    <apex:pageBlock >
+                        <div id='div1'>                                          
+                            <div id='div2' style='width:20vw'>                            
+                            </div>
+                            <div style='width:70vw'>
+                                <apex:pageBlockSection >
+                                    <!-- The table of doctors that is displayed -->
+                                    <apex:pageBlockTable id="docs" value="{!doctors}" var="d">
+                                        <!-- Each column displays a different field from the doctor object -->
+                                        <apex:column headerValue="Doctor Name" >
+                                            <!-- The doctor's name is a link to that doctor's detail page -->
+                                            <!-- The correct ID is set to the controller through a JS function when user mouses over the link -->
+                                            <apex:commandLink onmouseover="passID('{!d.id}')" action="{!doctorD}">
+                                                {!d.name}                            
+                                            </apex:commandLink>
+                                        </apex:column>
+                                        <apex:column headerValue="Specialty">
+                                            {!d.Specialty__c}
+                                        </apex:column>
+                                        <apex:column headerValue="Zip Code" id="dzip">
+                                            {!d.Zip_Code__c}
+                                        </apex:column>
+                                        <apex:column headerValue="Languages Spoken">
+                                            {!d.Languages__c}
+                                        </apex:column>
+                                        <apex:column headerValue="Insurance Plans">
+                                            {!d.Plan_Network__c}
+                                        </apex:column>
+                                        <apex:column headerValue="Accepting New Patients?">
+                                            {!d.Accepting_New_Patients__c}
+                                        </apex:column>                                    
+                                    </apex:pageBlockTable>
+                                    <apex:commandButton action="{!pdfpage}" value="View as PDF"/>                               
+                                </apex:pageBlockSection>
+                            </div>
                         </div>
-                        <div style='width:80vw'>
-                            <apex:pageBlockSection >
-                                
-                                
-                                
-                                
-                                <!-- The table of doctors that is displayed -->
-                                <apex:pageBlockTable id="docs" value="{!doctors}" var="d">
-                                    <!-- Each column displays a different field from the doctor object -->
-                                    <apex:column headerValue="Doctor Name" >
-                                        <!-- The doctor's name is a link to that doctor's detail page -->
-                                        <!-- The correct ID is set to the controller through a JS function when user mouses over the link -->
-                                        <apex:commandLink onmouseover="passID('{!d.id}')" action="{!doctorD}">
-                                            {!d.name}                            
-                                        </apex:commandLink>
-                                    </apex:column>
-                                    <apex:column headerValue="Specialty">
-                                        {!d.Specialty__c}
-                                    </apex:column>
-                                    <apex:column headerValue="Zip Code" id="dzip">
-                                        {!d.Zip_Code__c}
-                                    </apex:column>
-                                    <apex:column headerValue="Languages Spoken">
-                                        {!d.Languages__c}
-                                    </apex:column>
-                                    <apex:column headerValue="Insurance Plans">
-                                        {!d.Plan_Network__c}
-                                    </apex:column>
-                                    <apex:column headerValue="Accepting New Patients?">
-                                        {!d.Accepting_New_Patients__c}
-                                    </apex:column>
-                                    
-                                </apex:pageBlockTable>
-                                <apex:commandButton action="{!pdfpage}" value="View as PDF"/>
-                                
-                            </apex:pageBlockSection>
-                        </div>
-                    </div>
-                </apex:pageBlock>  
-                <!-- Hidden input passes ID to controller -->
-                <apex:inputHidden id="docid" value="{!docID}"/>
-                <apex:inputHidden id="appid" value="{!appID}"/>
-                
-            </apex:tab>
-            <!--This tab contains the list of current user's past appointments-->
-            <apex:tab label="Past Appointments" name="pastapps">
-                <apex:pageBlock >
-                    <apex:pageBlockTable value="{!apps}" var="a">
-                        <apex:column headerValue="Doctor's Name">
-                            <apex:commandLink onmouseover="passID('{!a.Doctor__c}')" action="{!doctorD}">
-                                {!a.Doctor__r.name}                          
-                            </apex:commandLink>
-                        </apex:column>
-                        <apex:column value="{!a.Appointment_Date_and_Time__c}"/>
-                        
-                        <apex:column>
-                            <apex:commandLink onmouseover="passAppID('{!a.Applications__r[0].id}')" action="{!appD}">
-                                {!a.Applications__r[0].name}
-                            </apex:commandLink>
-                        </apex:column>
-                    </apex:pageBlockTable>
-                </apex:pageBlock>
-                
-            </apex:tab>
-        </apex:tabPanel>
+                    </apex:pageBlock>  
+                    <!-- Hidden input passes ID to controller -->
+                    <apex:inputHidden id="docid" value="{!docID}"/>
+                    <apex:inputHidden id="appid" value="{!appID}"/>                
+                </apex:tab>
+                <!--This tab contains the list of current user's past appointments-->
+                <apex:tab label="Past Appointments" name="pastapps">
+                    <apex:pageBlock >
+                        <apex:pageBlockTable value="{!apps}" var="a">
+                            <apex:column headerValue="Doctor's Name">
+                                <apex:commandLink onmouseover="passID('{!a.Doctor__c}')" action="{!doctorD}">
+                                    {!a.Doctor__r.name}                          
+                                </apex:commandLink>
+                            </apex:column>
+                            <apex:column headerValue="Appointment Date and Time">
+                                {!a.Appointment_Date_and_Time__c}
+                            </apex:column>                        
+                            <apex:column headerValue="Link to Application">                            
+                                <apex:commandLink onmouseover="passAppID('{!a.Applications__r[0].id}')" action="{!appD}">
+                                    {!a.Applications__r[0].name}
+                                </apex:commandLink>
+                                <!--{!a.Applications__r[0].name}-->
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>                
+                </apex:tab>
+            </apex:tabPanel>
+        </apex:pageBlock>
     </apex:form>
     <script>
     let butts = document.querySelectorAll('.btn');
     for(let i=0;i<2;i++){ 
-        butts[i].style='color:white; background-color:#77AFDF';
+        butts[i].style='background-color:#77AFDF';
     }
     let tab = document.querySelector('.dataCol');
     tab.style = 'width:90vw';
     //This JS function takes in the ID of the doctor who's name the user is mousing over, and puts it in the hidden input
     function passID(value){
         console.log(value);
-        document.getElementById('j_id0:form1:docid').value=value;
-        
+        document.getElementById('j_id0:form1:j_id3:docid').value=value;        
     }
     function passAppID(value){
         console.log(value);
-        document.getElementById('j_id0:form1:appid').value=value;
-        
-    }
-    
-    
-    
-    
+        document.getElementById('j_id0:form1:j_id3:appid').value=value;        
+    }    
     //get user's current longitude and lattitude and store them in inputHiddens
     function getLocation() {
         if (navigator.geolocation) {
@@ -173,14 +153,16 @@
         } else { 
             //x.innerHTML = "Geolocation is not supported by this browser.";
         }
-    }
-    
+    }    
     function showPosition(position) {
-        let lat = document.getElementById("j_id0:form1:lat");
-        let lon = document.getElementById("j_id0:form1:lon");
+        let lat = document.getElementById("j_id0:form1:j_id3:lat");
+        let lon = document.getElementById("j_id0:form1:j_id3:lon");
         lat.value = position.coords.latitude;
         lon.value = position.coords.longitude;
         
+    }
+    function logOut(){
+        window.location.replace("{!$Site.Prefix}/secur/logout.jsp");
     }
     </script>
 </apex:page>

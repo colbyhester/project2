@@ -1,46 +1,45 @@
 <apex:page lightningStylesheets="true" standardController="Doctor__c" extensions="DoctorControllerExtension">
     <head>      
         <style>
+            .apexp{
+            flex-grow:1;
+            }
             #div1{
             display:flex;
-            flex-direction:row;
-            
+            flex-direction:row;            
+            }
+            #div2{
+            display:flex;
+            justify-content: flex-end;
             }
         </style>
     </head>
-    <div id='div1'>
-        
-            <apex:pageBlock >
-                <apex:form >
-                    <apex:pageBlockSection >
-                        
-                        <!-- User inputs information for appointment -->
-                        
-                        
-                        
-                     
-        
-                        <apex:inputField value="{!app['appointment_date_and_time__c']}"/>
-                        <br/>
-                        <apex:inputField value="{!app['patient_phone_number__c']}"/>
-                        <br/>
-                        <apex:inputField value="{!app['patient_email__c']}"/>
-                        <br/>
-                        
-                        
-                        <!-- Button that creates the appointment record and moves to next page -->
-                        <apex:commandButton id="butt" action="{!book}" value="Book" />
-                        
-                    </apex:pageBlockSection>
-                </apex:form>
-            </apex:pageBlock> 
-        </div>
-        
-    
+    <div id='div2'>
+        <input type="button" onClick="logOut();" value="Logout" />
+    </div>
+    <div id='div1'>        
+        <apex:pageBlock >
+            <apex:form >
+                <apex:pageBlockSection >                        
+                    <!-- User inputs information for appointment -->
+                    <apex:inputField value="{!app['appointment_date_and_time__c']}"/>
+                    <br/>
+                    <apex:inputField value="{!app['patient_phone_number__c']}"/>
+                    <br/>
+                    <apex:inputField value="{!app['patient_email__c']}"/>
+                    <br/>  
+                    <!-- Button that creates the appointment record and moves to next page -->
+                    <apex:commandButton id="butt" action="{!book}" value="Book">
+                    </apex:commandButton>                        
+                </apex:pageBlockSection>
+            </apex:form>
+        </apex:pageBlock> 
+    </div>
     <script>
     let butt = document.querySelector('.btn');
-    butt.style='color:white; background-color:#77AFDF';
-    
-    </script>
-    
+    butt.style= 'background-color:#77AFDF';         
+    function logOut(){
+        window.location.replace("{!$Site.Prefix}/secur/logout.jsp");
+    }  
+    </script>    
 </apex:page>

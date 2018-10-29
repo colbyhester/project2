@@ -1,5 +1,16 @@
 <apex:page standardController="Appointment__c" extensions="AppointmentExtension" lightningStylesheets="true">
+    <head>        
+        <style>
+            #div2{
+            display:flex;
+            justify-content: flex-end;
+            }
+        </style>
+    </head>  
     <apex:form >
+        <div id='div2'>
+            <input type="button" onClick="logOut();" value="Logout" />
+        </div>
         <apex:pageBlock >
             <apex:pageBlockSection title="Patient Page" columns="2">
                 <apex:inputField value="{!a['Name__c']}" />
@@ -49,8 +60,7 @@
             <apex:pageBlockSection title="Primary care physician" columns="2">
                 <apex:inputField value="{!a['Primary_Care_Physician__c']}" />
                 <apex:inputField value="{!a['If_Not_Primary_Physician__c']}"/>
-            </apex:pageBlockSection>
-            
+            </apex:pageBlockSection>           
             <apex:pageBlockSection title="Social History" columns="3">
                 <apex:inputField value="{!a['Current_Smoker__c']}"/>
                 <apex:inputField value="{!a['Former_Smoker__c']}"/>
@@ -61,20 +71,17 @@
                 <apex:inputField value="{!a['Hobbies__c']}"/>
                 <apex:inputField value="{!a['Number_of_Children__c']}"/>
                 <apex:inputField value="{!a['Age__c']}"/>     
-            </apex:pageBlockSection>
-            
+            </apex:pageBlockSection>           
             <apex:pageBlockSection title="Surgical History">
                 List Surgeries and/or hospitalization you have had with Date 
                 <apex:inputField value="{!a['None__c']}"/>
                 <apex:inputField value="{!a['List_Surgeries_or_Hospitalizations__c']}"/>
             </apex:pageBlockSection>
-            
             <apex:pageBlockSection title="Ongoing Medical Issues">
                 Any ongoing medical issues? If so List them, if not select None.
                 <apex:inputField value="{!a['None__c']}"/>
                 <apex:inputField value="{!a['Ongoing_Medical_Issues__c']}"/>
-            </apex:pageBlockSection>
-            
+            </apex:pageBlockSection>            
             <apex:pageBlockSection title="Allergies" columns="2">
                 Do you have seasonal, environmental, or food allergies?
                 <apex:inputField value="{!a['None__c']}"/>
@@ -83,8 +90,7 @@
             <apex:pageBlockSection title="Medication Allergies">
                 <apex:inputField value="{!a['None__c']}"/>
                 <apex:inputField value="{!a['Any_allergies_to_Medication__c']}"/>
-            </apex:pageBlockSection>
-            
+            </apex:pageBlockSection>           
             <apex:pageBlockSection title="Family and Personal History" columns="2">
                 Specify if you or a blood-relative have or had any of the following
                 <apex:inputField value="{!a['Family_and_Personal_History__c']}"/>   
@@ -92,25 +98,56 @@
                 <apex:inputField value="{!a['Sign_Date__c']}"/>
                 <apex:inputField value="{!a['Name__c']}"/>
                 <apex:inputField value="{!a['Date_of_Birth__c']}"/>  
-            </apex:pageBlockSection>
-            
+            </apex:pageBlockSection>            
             <apex:pageBlockSection title="Consent To Treatment">
+                <b> TO THE PATIENT:</b> You have the right, as a patient, to be informed about your condition and any recommended
+                medical or diagnostic procedure after being advised of risks and hazards involved. <b>It is the patient's
+                responsibility to pay copay or deductible amount at time of visit.</b> This is information so you may give or
+                withhold your consent to the visit. <br/>
+                This form has been fully explained to me. I have read it or had it read to me and I understand its contents
                 <apex:inputField value="{!a['PatientName__c']}"/>
                 <apex:inputField value="{!a['PatientDOB__c']}"/> 
                 <apex:inputField value="{!a['DateSign__c']}"/>     
                 <apex:inputField value="{!a['SigPatientName__c']}"/>
-            </apex:pageBlockSection>
-            
+            </apex:pageBlockSection>            
             <apex:pageBlockSection title="Controlled Substance Agreement">
+                <ul>
+                    <li> <b> MENTAL HEALTH AND/OR PAIN MANAGEMENT CONSULTANT</b> If I am currently involved in mental
+                        health therapy, or if I enter such therapy per instruction of Doctor/PA, I authorize my mental health
+                        practitioner to exchange unrestricted information regarding pain (complete shared medical information in
+                        Office Policies and Procedures)</li>
+                    <li> <b>USE OF MEDICATION</b> I will take all medications as prescribed. I will not make any change in dose or
+                        frequency of my medications. There will be no early refills of controlled medications without prior
+                        authorization. Narcotic pain medication must all be obtained from the same pharmacy each time
+                        (exceptions must be approved by Doctor/PA). I will abstain from alcohol use. I will not obtain the
+                        controlled substance/s which I receive here from another Doctor/PA</li>
+                    <li><b>DRUG SCREENING</b> I will participate in drug screening as a part of my treatment plan. I understand that
+                        drug screening may be conducted at any of my office visits or I may be called to come in to provide a
+                        urine sample. Screening may include urinalysis, blood testing and/or pill counts. I agree to pay all costs
+                        associated with drug testing not covered by my insurance. Refusal to submit to screening at the time
+                        specified may result in termination of services. The Downtown Doctor does not discriminate; we drug
+                        screen all patients from whom we prescribe chronic narcotics or any controlled substances.</li>
+                    <li><b>ILLEGAL AND NON-PRESCRIBED DRUG USE.</b> I understand that the use of any controlled medication
+                        not prescribed by the practice may result in termination of care. I understand the Downtown Doctor
+                        cooperates fully with city, state and federal law enforcement agencies as well as the Texas board of
+                        Pharmacy. I understand that the use of any illegal substance, may result in termination of care.</li>
+                </ul>
+                <b>LOST OR STOLEN MEDICATIONS</b> will not be replaced.<hr/>
+                I UNDERSTAND AND AGREE TO THE CONDITIONS OF CARE DESCRIBED ABOVE AND WILL COMPLY
+                WITH THEM. ALL MY QUESTIONS ABOUT THE TERMS OF THE AGREEMENT HAVE BEEN ANSWERED TO
+                MY SATISFACTION. FAILURE TO COMPLY WITH ANY OF THE TERMS OF THE AGREEMENT MAY
+                RESULT IN IMMEDIATE TERMINATION OF SERVICE.
                 <apex:inputField value="{!a['PatientName__c']}"/>
                 <apex:inputField value="{!a['PatientDOB__c']}"/> 
                 <apex:inputField value="{!a['DateSign__c']}"/>     
                 <apex:inputField value="{!a['SigPatientName__c']}"/>
-            </apex:pageBlockSection>
-            
-            <apex:commandButton action="{!saveApp}" value="Save">
-            </apex:commandButton>
+            </apex:pageBlockSection>           
+            <apex:commandButton action="{!saveApp}" value="Save"/>            
         </apex:pageBlock>
     </apex:form>
-    
+    <script>
+    function logOut(){
+        window.location.replace("{!$Site.Prefix}/secur/logout.jsp");
+    }
+    </script>    
 </apex:page>
